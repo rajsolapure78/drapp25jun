@@ -83,10 +83,10 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
       print("element.Date bp");
       if (double.parse(element.Value1) >= double.parse(widget.bloodPressureVitals.LowerRefRange) && double.parse(element.Value1) < double.parse(widget.bloodPressureVitals.UpperRefRange) && double.parse(element.Value2) <= double.parse(widget.bloodPressureVitals.UpperRefRange) && double.parse(element.Value2) > double.parse(widget.bloodPressureVitals.LowerRefRange)) {
         //chartData.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
-        chartData.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
+        chartData.add(RangeChartData(date: element.Date, low: double.parse(element.Value1), high: double.parse(element.Value2)));
       } else {
         //chartData1.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
-        chartData1.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
+        chartData1.add(RangeChartData(date: element.Date, low: double.parse(element.Value1), high: double.parse(element.Value2)));
       }
     }
   }

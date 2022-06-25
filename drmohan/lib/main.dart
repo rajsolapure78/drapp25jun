@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:drmohan/screens/screen_dailyhealthtracker.dart';
 /*import 'package:drmohan/screens/screen_bookappointment.dart';
 import 'package:drmohan/screens/screen_dailyhealthtracker.dart';
 import 'package:drmohan/screens/screen_diabetesshoppe.dart';
@@ -1167,11 +1168,11 @@ class DashboardScreen extends StatelessWidget {
             builder: (context) => HealthRecordScreen(),
           ));*/
     } else if (lVal.toLowerCase() == "dailyhealthtrackerscreen") {
-      /*Navigator.push(
+      Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => DailyHealthTrackerScreen(),
-          ));*/
+          ));
     } else if (lVal.toLowerCase() == "prescriptionsrefillsscreen") {
       /*PrescriptionsRefillsScreen.prescriptionDataReceived = "false";
       Navigator.push(

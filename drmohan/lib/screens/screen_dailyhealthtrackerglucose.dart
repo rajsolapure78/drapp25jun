@@ -84,13 +84,13 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
     for (var element in widget.glucoseItem) {
       if (double.parse(element.Value1) <= 100) {
         //chartData.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
+        chartData.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
       } else if (double.parse(element.Value1) >= 100 && double.parse(element.Value1) <= 140) {
         //chartData1.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData1.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
+        chartData1.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
       } else {
         //chartData2.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData2.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
+        chartData2.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
       }
     }
   }
