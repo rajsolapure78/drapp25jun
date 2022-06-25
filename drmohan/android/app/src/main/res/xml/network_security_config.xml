@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">www.rsolutions7.com</domain>
+        <domain includeSubdomains="true">rsolutions7.com</domain>
+        <domain includeSubdomains="true">docs.google.com</domain>
+        <domain includeSubdomains="true">www.drmohansdiabetes.net</domain>
+        <domain includeSubdomains="true">drmohansdiabetes.net</domain>
+    </domain-config>
+</network-security-config>
