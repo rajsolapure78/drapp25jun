@@ -8,7 +8,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 class ActivityTrackerTile extends StatefulWidget {
   final List<HealthTrackerRecordItem> weightItem;
 
-  const ActivityTrackerTile({Key? key, required this.weightItem}) : super(key: key);
+  const ActivityTrackerTile({Key? key, required this.weightItem})
+      : super(key: key);
 
   @override
   _ActivityTrackerTileState createState() => _ActivityTrackerTileState();
@@ -42,83 +43,110 @@ class _ActivityTrackerTileState extends State<ActivityTrackerTile> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         print(constraints.maxHeight);
         return Card(
           elevation: 6,
           child: Column(children: [
             Expanded(
               flex: 10,
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                  child: AutoSizeText(
-                    "Physical Activity (per day)",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: constraints.maxWidth * 0.078),
-                    maxLines: 1,
-                  ),
-                ),
-                Stack(children: [
-                  SizedBox(
-                    height: constraints.maxHeight * 0.35,
-                    width: constraints.maxHeight * 0.35,
-                    child: SfCircularChart(
-                      borderWidth: 0,
-                      margin: EdgeInsets.zero,
-                      series: _getRadialBarSeries(chartDataRadial1, 10000, Colors.blue),
-                    ),
-                  ),
-                  Positioned(
-                    top: constraints.maxHeight * 0.105,
-                    left: constraints.maxHeight * 0.175 - 20,
-                    child: Wrap(direction: Axis.vertical, crossAxisAlignment: WrapCrossAlignment.center, children: [
-                      Text(
-                        chartDataRadial1.first.y.toString(),
-                        style: TextStyle(fontSize: constraints.maxWidth * 0.078, fontWeight: FontWeight.bold),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+                      child: AutoSizeText(
+                        "Physical Activity (per day)",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: constraints.maxWidth * 0.078),
+                        maxLines: 1,
                       ),
-                      Text(
-                        "Steps",
-                        style: TextStyle(fontSize: constraints.maxWidth * 0.07),
+                    ),
+                    Stack(children: [
+                      SizedBox(
+                        height: constraints.maxHeight * 0.35,
+                        width: constraints.maxHeight * 0.35,
+                        child: SfCircularChart(
+                          borderWidth: 0,
+                          margin: EdgeInsets.zero,
+                          series: _getRadialBarSeries(
+                              chartDataRadial1, 10000, Colors.blue),
+                        ),
+                      ),
+                      Positioned(
+                        top: constraints.maxHeight * 0.105,
+                        left: constraints.maxHeight * 0.175 - 20,
+                        child: Wrap(
+                            direction: Axis.vertical,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Text(
+                                chartDataRadial1.first.y.toString(),
+                                style: TextStyle(
+                                    fontSize: constraints.maxWidth * 0.078,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Steps",
+                                style: TextStyle(
+                                    fontSize: constraints.maxWidth * 0.07),
+                              ),
+                            ]),
                       ),
                     ]),
-                  ),
-                ]),
-                const Text(
-                  "Goal - 10000",
-                  style: TextStyle(color: Colors.deepOrangeAccent, fontWeight: FontWeight.bold),
-                ),
-              ]),
+                    const Text(
+                      "Goal - 10000",
+                      style: TextStyle(
+                          color: Colors.deepOrangeAccent,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ]),
             ),
             Expanded(
               flex: 9,
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Text(
-                  "Calories Burned",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: constraints.maxWidth * 0.07),
-                ),
-                Stack(children: [
-                  SizedBox(
-                    height: constraints.maxHeight * 0.35,
-                    width: constraints.maxHeight * 0.35,
-                    child: SfCircularChart(borderWidth: 0, margin: EdgeInsets.zero, series: _getRadialBarSeries(chartDataRadial2, 1000, Colors.deepOrangeAccent)),
-                  ),
-                  Positioned(
-                    top: constraints.maxHeight * 0.1,
-                    left: constraints.maxHeight * 0.175 - 20,
-                    child: Wrap(direction: Axis.vertical, crossAxisAlignment: WrapCrossAlignment.center, children: [
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      "Calories Burned",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: constraints.maxWidth * 0.07),
+                    ),
+                    Stack(children: [
                       SizedBox(
-                        height: constraints.maxHeight * 0.128,
-                        width: constraints.maxHeight * 0.128,
-                        child: Image.network('https://www.rsolutions7.com/drmohan/images/calorieburntfire.png'),
+                        height: constraints.maxHeight * 0.35,
+                        width: constraints.maxHeight * 0.35,
+                        child: SfCircularChart(
+                            borderWidth: 0,
+                            margin: EdgeInsets.zero,
+                            series: _getRadialBarSeries(chartDataRadial2, 1000,
+                                Colors.deepOrangeAccent)),
                       ),
-                      Text(
-                        chartDataRadial2.first.y.toString(),
-                        style: TextStyle(fontSize: constraints.maxWidth * 0.07),
+                      Positioned(
+                        top: constraints.maxHeight * 0.1,
+                        left: constraints.maxHeight * 0.175 - 20,
+                        child: Wrap(
+                            direction: Axis.vertical,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: constraints.maxHeight * 0.128,
+                                width: constraints.maxHeight * 0.128,
+                                child: Image.network(
+                                    'https://www.rsolutions7.com/drmohan/images/calorieburntfire.png'),
+                              ),
+                              Text(
+                                chartDataRadial2.first.y.toString(),
+                                style: TextStyle(
+                                    fontSize: constraints.maxWidth * 0.07),
+                              ),
+                            ]),
                       ),
                     ]),
-                  ),
-                ]),
-              ]),
+                  ]),
             ),
           ]),
         );
@@ -126,7 +154,8 @@ class _ActivityTrackerTileState extends State<ActivityTrackerTile> {
     );
   }
 
-  List<RadialBarSeries<RadialChartData, String>> _getRadialBarSeries(List<RadialChartData> data, double maxValue, Color trackColor) {
+  List<RadialBarSeries<RadialChartData, String>> _getRadialBarSeries(
+      List<RadialChartData> data, double maxValue, Color trackColor) {
     return <RadialBarSeries<RadialChartData, String>>[
       RadialBarSeries<RadialChartData, String>(
         dataSource: data,

@@ -26,7 +26,8 @@ class DailyHealthTrackerScreen extends StatefulWidget {
   const DailyHealthTrackerScreen({Key? key}) : super(key: key);
 
   @override
-  _DailyHealthTrackerScreenState createState() => _DailyHealthTrackerScreenState();
+  _DailyHealthTrackerScreenState createState() =>
+      _DailyHealthTrackerScreenState();
 }
 
 class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
@@ -45,7 +46,8 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
   late String foodVitalId;
   bool _isLoading = false;
 
-  callToSetAppBarTitle() => createState().setAppBarTitle(OTPVerification.appscreensdataitems![14].srntxt1);
+  callToSetAppBarTitle() => createState()
+      .setAppBarTitle(OTPVerification.appscreensdataitems![14].srntxt1);
 
   @override
   AppBarWidget createState() => AppBarWidget();
@@ -65,10 +67,14 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
       for (var element in value) {
         if (element.VitalName == "BLOOD GLUCOSE") {
           bloodGlucoseVitalId = element.VitalID;
-          futures.add(httpService.getHealthTrackerRecord(DateFormat('MM/dd/yyyy').format((DateTime.now())).toString(), int.parse(element.VitalID)));
+          futures.add(httpService.getHealthTrackerRecord(
+              DateFormat('MM/dd/yyyy').format((DateTime.now())).toString(),
+              int.parse(element.VitalID)));
         } else if (element.VitalName == "BLOOD PRESSURE") {
           bloodPressureVitalId = element.VitalID;
-          futures.add(httpService.getHealthTrackerRecord(DateFormat('MM/dd/yyyy').format((DateTime.now())).toString(), int.parse(element.VitalID)));
+          futures.add(httpService.getHealthTrackerRecord(
+              DateFormat('MM/dd/yyyy').format((DateTime.now())).toString(),
+              int.parse(element.VitalID)));
         } else if (element.VitalName == "HEIGHT") {
           heightVitalId = element.VitalID;
         } else if (element.VitalName == "WEIGHT") {
@@ -81,7 +87,9 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
         HealthTrackerRecord healthRecord = value1[0];
         HealthTrackerRecord healthRecord1 = value1[1];
         if (healthRecord.list != null && healthRecord.list.isNotEmpty) {
-          final healthTrackerRecordListItem = healthRecord.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList();
+          final healthTrackerRecordListItem = healthRecord.list
+              .map((e) => HealthTrackerRecordItem.fromMap(e))
+              .toList();
           if (healthTrackerRecordListItem[0].VitalName == "BLOOD GLUCOSE") {
             bloodGlucoseVitals = healthRecord;
             bloodGlucoseVitalsList.addAll(healthTrackerRecordListItem);
@@ -92,7 +100,9 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
         }
 
         if (healthRecord1.list != null && healthRecord1.list.isNotEmpty) {
-          final healthTrackerRecordListItem = healthRecord1.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList();
+          final healthTrackerRecordListItem = healthRecord1.list
+              .map((e) => HealthTrackerRecordItem.fromMap(e))
+              .toList();
           if (healthTrackerRecordListItem[0].VitalName == "BLOOD GLUCOSE") {
             bloodGlucoseVitals = healthRecord1;
             bloodGlucoseVitalsList.addAll(healthTrackerRecordListItem);
@@ -120,81 +130,94 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
       body: !_isLoading
           ? SingleChildScrollView(
               child: Column(children: [
-                StaggeredGrid.count(crossAxisCount: 18, mainAxisSpacing: 4, crossAxisSpacing: 4, children: [
-                  StaggeredGridTile.count(
-                    crossAxisCellCount: 9,
-                    mainAxisCellCount: 10,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DailyHealthTrackerGlucoseScreen(
-                                glucoseItem: bloodGlucoseVitalsList,
-                                vitalId: bloodGlucoseVitalId,
-                                glucoseVitals: bloodGlucoseVitals,
-                              ),
-                            )).then((_) => fetchData());
-                      },
-                      child: GluscoseTrackerTile(
-                        glucoseItem: bloodGlucoseVitalsList,
+                StaggeredGrid.count(
+                    crossAxisCount: 18,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    children: [
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 9,
+                        mainAxisCellCount: 10,
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DailyHealthTrackerGlucoseScreen(
+                                    glucoseItem: bloodGlucoseVitalsList,
+                                    vitalId: bloodGlucoseVitalId,
+                                    glucoseVitals: bloodGlucoseVitals,
+                                  ),
+                                )).then((_) => fetchData());
+                          },
+                          child: GluscoseTrackerTile(
+                            glucoseItem: bloodGlucoseVitalsList,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  StaggeredGridTile.count(
-                    crossAxisCellCount: 9,
-                    mainAxisCellCount: 12,
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DailyHealthTrackerMyDietScreen(),
-                              ));
-                        },
-                        child: const DietTrackerTile()),
-                  ),
-                  StaggeredGridTile.count(
-                    crossAxisCellCount: 9,
-                    mainAxisCellCount: 7,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DailyHealthTrackerBloodPressureScreen(
-                                bloodPressureItem: bloodPressureVitalsList,
-                                vitalId: bloodPressureVitalId,
-                                bloodPressureVitals: bloodPressureVitals,
-                              ),
-                            )).then((_) => fetchData());
-                      },
-                      child: VitalsTrackerTile(bloodPressureItem: bloodPressureVitalsList),
-                    ),
-                  ),
-                  StaggeredGridTile.count(
-                    crossAxisCellCount: 9,
-                    mainAxisCellCount: 12,
-                    child: InkWell(onTap: () {}, child: ActivityTrackerTile(weightItem: weightVitalsList)),
-                  ),
-                  StaggeredGridTile.count(
-                    crossAxisCellCount: 9,
-                    mainAxisCellCount: 10,
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DailyHealthTrackerWeightScreen(
-                                weightItem: weightVitalsList,
-                                vitalId: weightVitalId,
-                              ),
-                            ),
-                          );
-                        },
-                        child: WeightTrackerTile(weightItem: weightVitalsList)),
-                  ),
-                ]),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 9,
+                        mainAxisCellCount: 12,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DailyHealthTrackerMyDietScreen(),
+                                  ));
+                            },
+                            child: const DietTrackerTile()),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 9,
+                        mainAxisCellCount: 7,
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DailyHealthTrackerBloodPressureScreen(
+                                    bloodPressureItem: bloodPressureVitalsList,
+                                    vitalId: bloodPressureVitalId,
+                                    bloodPressureVitals: bloodPressureVitals,
+                                  ),
+                                )).then((_) => fetchData());
+                          },
+                          child: VitalsTrackerTile(
+                              bloodPressureItem: bloodPressureVitalsList),
+                        ),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 9,
+                        mainAxisCellCount: 12,
+                        child: InkWell(
+                            onTap: () {},
+                            child: ActivityTrackerTile(
+                                weightItem: weightVitalsList)),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 9,
+                        mainAxisCellCount: 10,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      DailyHealthTrackerWeightScreen(
+                                    weightItem: weightVitalsList,
+                                    vitalId: weightVitalId,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: WeightTrackerTile(
+                                weightItem: weightVitalsList)),
+                      ),
+                    ]),
                 const SizedBox(
                   height: 80,
                 )
@@ -208,7 +231,9 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
         //child: Icon(Icons.add, color: Colors.blue),
         child: CircleAvatar(
           radius: 30.0,
-          backgroundImage: NetworkImage(OTPVerification.appscreensdataitems![36].srntxt2 + '/images/dmdscLOGOsmall.png'),
+          backgroundImage: NetworkImage(
+              OTPVerification.appscreensdataitems![36].srntxt2 +
+                  '/images/dmdscLOGOsmall.png'),
           backgroundColor: Colors.transparent,
         ),
         onPressed: () {},

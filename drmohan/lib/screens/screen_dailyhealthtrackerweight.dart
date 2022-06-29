@@ -20,13 +20,17 @@ class DailyHealthTrackerWeightScreen extends StatefulWidget {
   final List<HealthTrackerRecordItem> weightItem;
   final String vitalId;
 
-  const DailyHealthTrackerWeightScreen({Key? key, required this.weightItem, required this.vitalId}) : super(key: key);
+  const DailyHealthTrackerWeightScreen(
+      {Key? key, required this.weightItem, required this.vitalId})
+      : super(key: key);
 
   @override
-  _DailyHealthTrackerWeightScreenState createState() => _DailyHealthTrackerWeightScreenState();
+  _DailyHealthTrackerWeightScreenState createState() =>
+      _DailyHealthTrackerWeightScreenState();
 }
 
-class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeightScreen> {
+class _DailyHealthTrackerWeightScreenState
+    extends State<DailyHealthTrackerWeightScreen> {
   final HttpService httpService = HttpService();
   static bool showHide = true;
   final _textEditingController = TextEditingController();
@@ -54,7 +58,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
     fToast = FToast();
     fToast.init(context);
     _displayDate = DateTime.now().subtract(const Duration(days: 2));
-    _trackballBehavior = TrackballBehavior(enable: true, activationMode: ActivationMode.singleTap);
+    _trackballBehavior = TrackballBehavior(
+        enable: true, activationMode: ActivationMode.singleTap);
     chartData = <WeightData>[
       WeightData(
         date: '12/09',
@@ -81,7 +86,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
       appBar: AppBarWidget(),
       body: FutureBuilder(
         future: httpService.getDashboardItems(),
-        builder: (BuildContext context, AsyncSnapshot<List<Dashboarditem>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<Dashboarditem>> snapshot) {
           log('data: $snapshot.hasData');
           if (snapshot.hasData) {
             List<Dashboarditem>? dashboarditems = snapshot.data;
@@ -127,7 +133,14 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                                 backgroundColor: Colors.blue,
                                 child: Text(
                                   ProfileScreen.selectedProfile.PatientName[0],
-                                  style: TextStyle(fontFamily: 'Arial', fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, color: Colors.white, fontSize: MediaQuery.of(context).size.width * 0.055),
+                                  style: TextStyle(
+                                      fontFamily: 'Arial',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.055),
                                 )),
                           ),
                           Container(
@@ -146,16 +159,24 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                                     Container(
                                         margin: EdgeInsets.all(0),
                                         color: Colors.white,
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.45,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.PatientName,
+                                            ProfileScreen
+                                                .selectedProfile.PatientName,
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -167,28 +188,44 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.09,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.09,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[0] + ":",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[0] +
+                                                ":",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.4,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             ProfileScreen.selectedProfile.MrNo,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -200,28 +237,45 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.1,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[1] + ": ",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[1] +
+                                                ": ",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.DOB.split(" ")[0],
+                                            ProfileScreen.selectedProfile.DOB
+                                                .split(" ")[0],
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -254,7 +308,16 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                                           ProfileScreen.selectedProfile.DOB
                                               .split(" ")[0],
                                 )),*/
-                          Container(height: MediaQuery.of(context).size.height * 0.15, width: MediaQuery.of(context).size.width * 0.15, margin: EdgeInsets.only(left: 2), child: Image.network(DrMohanApp.appinfoitems![0].srntxt2 + "/images/" + ProfileScreen.selectedProfile.Gender.toLowerCase() + ".png"))
+                          Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              margin: EdgeInsets.only(left: 2),
+                              child: Image.network(
+                                  DrMohanApp.appinfoitems![0].srntxt2 +
+                                      "/images/" +
+                                      ProfileScreen.selectedProfile.Gender
+                                          .toLowerCase() +
+                                      ".png"))
                         ],
                       ),
                     ),
@@ -280,7 +343,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                       children: const [
                         Text(
                           "Select Date",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -303,7 +367,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                       child: Row(children: [
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.subtract(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.subtract(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_back_ios_outlined),
@@ -317,7 +382,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                         )),
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.add(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.add(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_forward_ios_outlined),
@@ -332,7 +398,8 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                           child: Text(
                         'Enter Body Weight',
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ))
                     ],
                   ),
@@ -357,7 +424,9 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                     ),
                     child: Center(
                       child: TextField(
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(5.0)),
                         controller: _textEditingController,
                       ),
                     ),
@@ -371,10 +440,13 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                     margin: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(22),
-                      gradient: const LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-                        Colors.lightBlueAccent,
-                        Colors.blue,
-                      ]),
+                      gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.lightBlueAccent,
+                            Colors.blue,
+                          ]),
                       color: Colors.white,
                     ),
                     child: Center(
@@ -388,7 +460,10 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                       child: const Text(
                         'SUBMIT',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
                       ),
                     )),
                   ),
@@ -401,7 +476,10 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
                       Text(
                         'LAST SEVEN READINGS',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 17),
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17),
                       ),
                     ]),
                   ),
@@ -441,7 +519,9 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
         //child: Icon(Icons.add, color: Colors.blue),
         child: CircleAvatar(
           radius: 30.0,
-          backgroundImage: NetworkImage(OTPVerification.appscreensdataitems![36].srntxt2 + '/images/dmdscLOGOsmall.png'),
+          backgroundImage: NetworkImage(
+              OTPVerification.appscreensdataitems![36].srntxt2 +
+                  '/images/dmdscLOGOsmall.png'),
           backgroundColor: Colors.transparent,
         ),
         onPressed: () {},
@@ -482,7 +562,13 @@ class _DailyHealthTrackerWeightScreenState extends State<DailyHealthTrackerWeigh
   /// on the stacked line chart.
   List<StackedLineSeries<WeightData, String>> _getStackedLineSeries() {
     return <StackedLineSeries<WeightData, String>>[
-      StackedLineSeries<WeightData, String>(dataSource: chartData!, xValueMapper: (WeightData d1, _) => d1.date, yValueMapper: (WeightData d2, _) => d2.weightReading, pointColorMapper: (WeightData d3, _) => Colors.pink, markerSettings: MarkerSettings(isVisible: true, color: Colors.pink), dataLabelSettings: DataLabelSettings(isVisible: true)),
+      StackedLineSeries<WeightData, String>(
+          dataSource: chartData!,
+          xValueMapper: (WeightData d1, _) => d1.date,
+          yValueMapper: (WeightData d2, _) => d2.weightReading,
+          pointColorMapper: (WeightData d3, _) => Colors.pink,
+          markerSettings: MarkerSettings(isVisible: true, color: Colors.pink),
+          dataLabelSettings: DataLabelSettings(isVisible: true)),
     ];
   }
 }

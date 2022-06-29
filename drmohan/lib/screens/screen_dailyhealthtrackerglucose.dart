@@ -36,13 +36,20 @@ class DailyHealthTrackerGlucoseScreen extends StatefulWidget {
   final String vitalId;
   final HealthTrackerRecord glucoseVitals;
 
-  const DailyHealthTrackerGlucoseScreen({Key? key, required this.glucoseItem, required this.vitalId, required this.glucoseVitals}) : super(key: key);
+  const DailyHealthTrackerGlucoseScreen(
+      {Key? key,
+      required this.glucoseItem,
+      required this.vitalId,
+      required this.glucoseVitals})
+      : super(key: key);
 
   @override
-  _DailyHealthTrackerGlucoseScreenState createState() => _DailyHealthTrackerGlucoseScreenState();
+  _DailyHealthTrackerGlucoseScreenState createState() =>
+      _DailyHealthTrackerGlucoseScreenState();
 }
 
-class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGlucoseScreen> {
+class _DailyHealthTrackerGlucoseScreenState
+    extends State<DailyHealthTrackerGlucoseScreen> {
   late FToast fToast;
   final HttpService httpService = HttpService();
   final _textEditingController = TextEditingController();
@@ -61,7 +68,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
   var offset = 0.0;
   var offsetDate = DateTime.now();
 
-  callToSetAppBarTitle() => createState().setAppBarTitle("Blood Glucose Monitor");
+  callToSetAppBarTitle() =>
+      createState().setAppBarTitle("Blood Glucose Monitor");
 
   @override
   AppBarWidget createState() => AppBarWidget();
@@ -70,9 +78,14 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
     setState(() {
       isLoading = true;
     });
-    await httpService.getHealthTrackerRecord(DateFormat('MM/dd/yyyy').format(_selectedDate).toString(), int.parse(widget.vitalId)).then((value) {
+    await httpService
+        .getHealthTrackerRecord(
+            DateFormat('MM/dd/yyyy').format(_selectedDate).toString(),
+            int.parse(widget.vitalId))
+        .then((value) {
       widget.glucoseItem.clear();
-      widget.glucoseItem.addAll(value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
+      widget.glucoseItem.addAll(
+          value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
       //sortData();
       setState(() {
         isLoading = false;
@@ -83,14 +96,18 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
   void sortData() {
     for (var element in widget.glucoseItem) {
       if (double.parse(element.Value1) <= 100) {
-        //chartData.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
-      } else if (double.parse(element.Value1) >= 100 && double.parse(element.Value1) <= 140) {
-        //chartData1.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData1.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
+        chartData.add(SplineCharData(
+            x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
+            y: double.parse(element.Value1)));
+      } else if (double.parse(element.Value1) >= 100 &&
+          double.parse(element.Value1) <= 140) {
+        chartData1.add(SplineCharData(
+            x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
+            y: double.parse(element.Value1)));
       } else {
-        //chartData2.add(SplineCharData(x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), y: double.parse(element.Value1)));
-        chartData2.add(SplineCharData(x: element.Date, y: double.parse(element.Value1)));
+        chartData2.add(SplineCharData(
+            x: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
+            y: double.parse(element.Value1)));
       }
     }
   }
@@ -156,7 +173,14 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                                 backgroundColor: Colors.blue,
                                 child: Text(
                                   ProfileScreen.selectedProfile.PatientName[0],
-                                  style: TextStyle(fontFamily: 'Arial', fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, color: Colors.white, fontSize: MediaQuery.of(context).size.width * 0.055),
+                                  style: TextStyle(
+                                      fontFamily: 'Arial',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.055),
                                 )),
                           ),
                           Container(
@@ -175,16 +199,24 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                                     Container(
                                         margin: EdgeInsets.all(0),
                                         color: Colors.white,
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.45,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.PatientName,
+                                            ProfileScreen
+                                                .selectedProfile.PatientName,
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -196,28 +228,44 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.09,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.09,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[0] + ":",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[0] +
+                                                ":",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.4,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             ProfileScreen.selectedProfile.MrNo,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -229,28 +277,45 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.1,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[1] + ": ",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[1] +
+                                                ": ",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.DOB.split(" ")[0],
+                                            ProfileScreen.selectedProfile.DOB
+                                                .split(" ")[0],
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -284,7 +349,16 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                                           ProfileScreen.selectedProfile.DOB
                                               .split(" ")[0],
                                 )),*/
-                          Container(height: MediaQuery.of(context).size.height * 0.15, width: MediaQuery.of(context).size.width * 0.15, margin: const EdgeInsets.only(left: 2), child: Image.network(DrMohanApp.appinfoitems![0].srntxt2 + "/images/" + ProfileScreen.selectedProfile.Gender.toLowerCase() + ".png"))
+                          Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              margin: const EdgeInsets.only(left: 2),
+                              child: Image.network(
+                                  DrMohanApp.appinfoitems![0].srntxt2 +
+                                      "/images/" +
+                                      ProfileScreen.selectedProfile.Gender
+                                          .toLowerCase() +
+                                      ".png"))
                         ],
                       ),
                     ),
@@ -295,7 +369,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                       children: const [
                         Text(
                           "Select Date & Time",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -318,7 +393,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                       child: Row(children: [
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.subtract(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.subtract(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_back_ios_outlined),
@@ -334,7 +410,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                         )),
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.add(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.add(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_forward_ios_outlined),
@@ -361,13 +438,16 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                         IconButton(
                           onPressed: () {
                             offset = _scrollControllerTimePicker.offset;
-                            offset > size ? offset = offset - size : offset = 0.0;
+                            offset > size
+                                ? offset = offset - size
+                                : offset = 0.0;
                             navigate();
                           },
                           icon: const Icon(Icons.arrow_back_ios_outlined),
                         ),
                         Expanded(
-                          child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                          child: LayoutBuilder(builder: (BuildContext context,
+                              BoxConstraints constraints) {
                             print(constraints.maxWidth);
                             size = constraints.maxWidth;
                             return HorizontalTimePicker(
@@ -381,13 +461,18 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                               startTimeInHour: 0,
                               endTimeInHour: 24,
                               timeIntervalInMinutes: 60,
-                              dateForTime: DateTime.now().add(const Duration(days: 1)),
+                              dateForTime:
+                                  DateTime.now().add(const Duration(days: 1)),
                               timeTextStyle: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
                               showDisabled: false,
-                              selectedTimeTextStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.lightBlue, decoration: TextDecoration.underline),
+                              selectedTimeTextStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.lightBlue,
+                                  decoration: TextDecoration.underline),
                             );
                           }),
                         ),
@@ -409,7 +494,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                         child: Text(
                           'Enter Blood Glucose Value',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 15),
                         ),
                       ),
                     ],
@@ -435,7 +521,10 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                     ),
                     child: Center(
                       child: TextField(
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(5.0)),
                         controller: _textEditingController,
                       ),
                     ),
@@ -470,7 +559,10 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                         child: Text(
                           'SUBMIT',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                         ),
                       ),
                     ),
@@ -484,7 +576,10 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                       Text(
                         'LAST SEVEN READINGS',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 17),
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17),
                       ),
                     ]),
                   ),
@@ -500,10 +595,32 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                   ),
                   SfCartesianChart(
                     plotAreaBorderWidth: 0,
-                    primaryYAxis: NumericAxis(minimum: widget.glucoseVitals.YaxisMinRange != null ? double.parse(widget.glucoseVitals.YaxisMinRange) : 0, maximum: widget.glucoseVitals.YaxisMaxRange != null ? double.parse(widget.glucoseVitals.YaxisMaxRange) : 300, interval: widget.glucoseVitals.YaxisInterval != null ? double.parse(widget.glucoseVitals.YaxisInterval) : 30),
+                    primaryYAxis: NumericAxis(
+                        minimum: widget.glucoseVitals.YaxisMinRange != null
+                            ? double.parse(widget.glucoseVitals.YaxisMinRange)
+                            : 0,
+                        maximum: widget.glucoseVitals.YaxisMaxRange != null
+                            ? double.parse(widget.glucoseVitals.YaxisMaxRange)
+                            : 300,
+                        interval: widget.glucoseVitals.YaxisInterval != null
+                            ? double.parse(widget.glucoseVitals.YaxisInterval)
+                            : 30),
                     primaryXAxis: DateTimeAxis(
-                        minimum: DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, _selectedTime.hour, _selectedTime.minute, _selectedTime.second),
-                        maximum: DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, _selectedTime.hour, _selectedTime.minute, _selectedTime.second).add(const Duration(minutes: 60)),
+                        minimum: DateTime(
+                            _selectedDate.year,
+                            _selectedDate.month,
+                            _selectedDate.day,
+                            _selectedTime.hour,
+                            _selectedTime.minute,
+                            _selectedTime.second),
+                        maximum: DateTime(
+                                _selectedDate.year,
+                                _selectedDate.month,
+                                _selectedDate.day,
+                                _selectedTime.hour,
+                                _selectedTime.minute,
+                                _selectedTime.second)
+                            .add(const Duration(minutes: 60)),
                         interval: 10,
                         dateFormat: DateFormat.Hm(),
                         edgeLabelPlacement: EdgeLabelPlacement.shift,
@@ -523,21 +640,42 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
                           const SizedBox(
                             width: 8,
                           ),
-                          Container(width: 15, height: 15, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 3, color: Colors.pink)), child: Container()),
+                          Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(width: 3, color: Colors.pink)),
+                              child: Container()),
                         ]),
                         Wrap(children: [
                           const Text("Normal"),
                           const SizedBox(
                             width: 8,
                           ),
-                          Container(width: 15, height: 15, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 3, color: Colors.blue)), child: Container()),
+                          Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border:
+                                      Border.all(width: 3, color: Colors.blue)),
+                              child: Container()),
                         ]),
                         Wrap(children: [
                           const Text("High"),
                           const SizedBox(
                             width: 8,
                           ),
-                          Container(width: 15, height: 15, decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(width: 3, color: Colors.yellow)), child: Container()),
+                          Container(
+                              width: 15,
+                              height: 15,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      width: 3, color: Colors.yellow)),
+                              child: Container()),
                         ]),
                       ],
                     ),
@@ -553,7 +691,9 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
         //child: Icon(Icons.add, color: Colors.blue),
         child: CircleAvatar(
           radius: 30.0,
-          backgroundImage: NetworkImage(OTPVerification.appscreensdataitems![36].srntxt2 + '/images/dmdscLOGOsmall.png'),
+          backgroundImage: NetworkImage(
+              OTPVerification.appscreensdataitems![36].srntxt2 +
+                  '/images/dmdscLOGOsmall.png'),
           backgroundColor: Colors.transparent,
         ),
         onPressed: () {},
@@ -574,7 +714,7 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 2),
           );
-          fetchData();
+
         } else {
           fToast.showToast(
             child: showErrorToast("Something Went Wrong!!"),
@@ -585,6 +725,8 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
         setState(() {
           isSubmitting = false;
         });
+        _textEditingController.clear();
+        fetchData();
       });
     } on Exception catch (e) {
       log(e.toString());
@@ -593,9 +735,39 @@ class _DailyHealthTrackerGlucoseScreenState extends State<DailyHealthTrackerGluc
 
   List<SplineAreaSeries<SplineCharData, dynamic>> _getSplineAreaSeries() {
     return <SplineAreaSeries<SplineCharData, dynamic>>[
-      SplineAreaSeries<SplineCharData, dynamic>(dataSource: chartData, splineType: SplineType.cardinal, color: Colors.blue.shade100, xValueMapper: (SplineCharData d1, _) => d1.x, yValueMapper: (SplineCharData d2, _) => d2.y, dashArray: <double>[5, 5], emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average), markerSettings: MarkerSettings(isVisible: true, borderColor: Colors.pink), dataLabelSettings: DataLabelSettings(isVisible: true)),
-      SplineAreaSeries<SplineCharData, dynamic>(dataSource: chartData1, splineType: SplineType.cardinal, color: Colors.blue.shade100, xValueMapper: (SplineCharData d1, _) => d1.x, yValueMapper: (SplineCharData d2, _) => d2.y, dashArray: <double>[5, 5], emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average), markerSettings: MarkerSettings(isVisible: true, borderColor: Colors.blue), dataLabelSettings: DataLabelSettings(isVisible: true)),
-      SplineAreaSeries<SplineCharData, dynamic>(dataSource: chartData2, splineType: SplineType.cardinal, color: Colors.blue.shade100, xValueMapper: (SplineCharData d1, _) => d1.x, yValueMapper: (SplineCharData d2, _) => d2.y, dashArray: <double>[5, 5], emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average), markerSettings: MarkerSettings(isVisible: true, borderColor: Colors.yellow), dataLabelSettings: DataLabelSettings(isVisible: true)),
+      SplineAreaSeries<SplineCharData, dynamic>(
+          dataSource: chartData,
+          splineType: SplineType.cardinal,
+          color: Colors.blue.shade100,
+          xValueMapper: (SplineCharData d1, _) => d1.x,
+          yValueMapper: (SplineCharData d2, _) => d2.y,
+          dashArray: <double>[5, 5],
+          emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average),
+          markerSettings:
+              MarkerSettings(isVisible: true, borderColor: Colors.pink),
+          dataLabelSettings: DataLabelSettings(isVisible: true)),
+      SplineAreaSeries<SplineCharData, dynamic>(
+          dataSource: chartData1,
+          splineType: SplineType.cardinal,
+          color: Colors.blue.shade100,
+          xValueMapper: (SplineCharData d1, _) => d1.x,
+          yValueMapper: (SplineCharData d2, _) => d2.y,
+          dashArray: <double>[5, 5],
+          emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average),
+          markerSettings:
+              MarkerSettings(isVisible: true, borderColor: Colors.blue),
+          dataLabelSettings: DataLabelSettings(isVisible: true)),
+      SplineAreaSeries<SplineCharData, dynamic>(
+          dataSource: chartData2,
+          splineType: SplineType.cardinal,
+          color: Colors.blue.shade100,
+          xValueMapper: (SplineCharData d1, _) => d1.x,
+          yValueMapper: (SplineCharData d2, _) => d2.y,
+          dashArray: <double>[5, 5],
+          emptyPointSettings: EmptyPointSettings(mode: EmptyPointMode.average),
+          markerSettings:
+              MarkerSettings(isVisible: true, borderColor: Colors.yellow),
+          dataLabelSettings: DataLabelSettings(isVisible: true)),
     ];
   }
 

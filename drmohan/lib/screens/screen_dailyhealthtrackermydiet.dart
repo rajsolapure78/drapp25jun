@@ -35,19 +35,41 @@ class DailyHealthTrackerMyDietScreen extends StatefulWidget {
   const DailyHealthTrackerMyDietScreen({Key? key}) : super(key: key);
 
   @override
-  _DailyHealthTrackerMyDietScreenState createState() => _DailyHealthTrackerMyDietScreenState();
+  _DailyHealthTrackerMyDietScreenState createState() =>
+      _DailyHealthTrackerMyDietScreenState();
 }
 
-class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDietScreen> {
+class _DailyHealthTrackerMyDietScreenState
+    extends State<DailyHealthTrackerMyDietScreen> {
   int index = 0;
   final HttpService httpService = HttpService();
   static bool showHide = true;
   var diet = [
-    MyDietItem(diet: "Breakfast", totalConsumedCalories: "0", totalCalories: "563", dietDetails: []),
-    MyDietItem(diet: "Morning Snack", totalConsumedCalories: "0", totalCalories: "211", dietDetails: []),
-    MyDietItem(diet: "Lunch", totalConsumedCalories: "0", totalCalories: "563", dietDetails: []),
-    MyDietItem(diet: "Evening Snack", totalConsumedCalories: "0", totalCalories: "211", dietDetails: []),
-    MyDietItem(diet: "Dinner", totalConsumedCalories: "0", totalCalories: "563", dietDetails: []),
+    MyDietItem(
+        diet: "Breakfast",
+        totalConsumedCalories: "0",
+        totalCalories: "563",
+        dietDetails: []),
+    MyDietItem(
+        diet: "Morning Snack",
+        totalConsumedCalories: "0",
+        totalCalories: "211",
+        dietDetails: []),
+    MyDietItem(
+        diet: "Lunch",
+        totalConsumedCalories: "0",
+        totalCalories: "563",
+        dietDetails: []),
+    MyDietItem(
+        diet: "Evening Snack",
+        totalConsumedCalories: "0",
+        totalCalories: "211",
+        dietDetails: []),
+    MyDietItem(
+        diet: "Dinner",
+        totalConsumedCalories: "0",
+        totalCalories: "563",
+        dietDetails: []),
   ];
   int consumerCalories = 0;
 
@@ -82,7 +104,8 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
       appBar: AppBarWidget(),
       body: FutureBuilder(
         future: httpService.getDashboardItems(),
-        builder: (BuildContext context, AsyncSnapshot<List<Dashboarditem>> snapshot) {
+        builder: (BuildContext context,
+            AsyncSnapshot<List<Dashboarditem>> snapshot) {
           log('data: $snapshot.hasData');
           if (snapshot.hasData) {
             List<Dashboarditem>? dashboarditems = snapshot.data;
@@ -115,7 +138,13 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                             backgroundColor: Colors.blue,
                             child: Text(
                               ProfileScreen.selectedProfile.PatientName[0],
-                              style: TextStyle(fontFamily: 'Arial', fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, color: Colors.white, fontSize: MediaQuery.of(context).size.width * 0.055),
+                              style: TextStyle(
+                                  fontFamily: 'Arial',
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: MediaQuery.of(context).size.width *
+                                      0.055),
                             )),
                       ),
                       Container(
@@ -134,16 +163,22 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                                 Container(
                                     margin: EdgeInsets.all(0),
                                     color: Colors.white,
-                                    height: MediaQuery.of(context).size.height * 0.03,
-                                    width: MediaQuery.of(context).size.width * 0.45,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.45,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        ProfileScreen.selectedProfile.PatientName,
+                                        ProfileScreen
+                                            .selectedProfile.PatientName,
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.030,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.030,
                                           color: Colors.blue,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -155,28 +190,40 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                               children: [
                                 Container(
                                     margin: EdgeInsets.all(0),
-                                    height: MediaQuery.of(context).size.height * 0.03,
-                                    width: MediaQuery.of(context).size.width * 0.09,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.09,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        DrMohanApp.appinfoitems![0].srntxt4.split(',')[0] + ":",
+                                        DrMohanApp.appinfoitems![0].srntxt4
+                                                .split(',')[0] +
+                                            ":",
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.030,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.030,
                                           color: Colors.blue,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     )),
                                 Container(
-                                    height: MediaQuery.of(context).size.height * 0.03,
-                                    width: MediaQuery.of(context).size.width * 0.4,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.4,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
                                         ProfileScreen.selectedProfile.MrNo,
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.030,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.030,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -188,28 +235,41 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                               children: [
                                 Container(
                                     margin: EdgeInsets.all(0),
-                                    height: MediaQuery.of(context).size.height * 0.03,
-                                    width: MediaQuery.of(context).size.width * 0.1,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.1,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        DrMohanApp.appinfoitems![0].srntxt4.split(',')[1] + ": ",
+                                        DrMohanApp.appinfoitems![0].srntxt4
+                                                .split(',')[1] +
+                                            ": ",
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.030,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.030,
                                           color: Colors.blue,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     )),
                                 Container(
-                                    height: MediaQuery.of(context).size.height * 0.03,
-                                    width: MediaQuery.of(context).size.width * 0.35,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.03,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        ProfileScreen.selectedProfile.DOB.split(" ")[0],
+                                        ProfileScreen.selectedProfile.DOB
+                                            .split(" ")[0],
                                         style: TextStyle(
-                                          fontSize: MediaQuery.of(context).size.width * 0.030,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.030,
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -242,7 +302,16 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                                           ProfileScreen.selectedProfile.DOB
                                               .split(" ")[0],
                                 )),*/
-                      Container(height: MediaQuery.of(context).size.height * 0.15, width: MediaQuery.of(context).size.width * 0.15, margin: EdgeInsets.only(left: 2), child: Image.network(DrMohanApp.appinfoitems![0].srntxt2 + "/images/" + ProfileScreen.selectedProfile.Gender.toLowerCase() + ".png"))
+                      Container(
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          width: MediaQuery.of(context).size.width * 0.15,
+                          margin: EdgeInsets.only(left: 2),
+                          child: Image.network(
+                              DrMohanApp.appinfoitems![0].srntxt2 +
+                                  "/images/" +
+                                  ProfileScreen.selectedProfile.Gender
+                                      .toLowerCase() +
+                                  ".png"))
                     ],
                   ),
                 ),
@@ -270,12 +339,16 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                       child: Row(children: [
                         Text(
                           consumerCalories.toString(),
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 24),
                         ),
-                        const Text(" " + "of 2100 Cal eaten", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18))
+                        const Text(" " + "of 2100 Cal eaten",
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal, fontSize: 18))
                       ]),
                     ),
-                    Image.network('https://www.rsolutions7.com/drmohan/images/graph.png'),
+                    Image.network(
+                        'https://www.rsolutions7.com/drmohan/images/graph.png'),
                   ]),
                 ]),
               ),
@@ -297,121 +370,152 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
                   // Convert each item into a widget based on the type of item it is.
                   itemBuilder: (context, index) {
                     final dietItem = diet[index];
-                    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                      InkWell(
-                        onTap: () async {
-                          this.index = index;
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AddFoodScreen(diet: dietItem.diet),
-                            ),
-                          ).then((value) {
-                            var foodItemDetails = (value as List).map((e) => e as String).toList();
-                            print(foodItemDetails[0]);
-                            DietDetailItem dietDetailItem = DietDetailItem(food: foodItemDetails[0], size: foodItemDetails[1] + " " + foodItemDetails[2], consumedCalories: foodItemDetails[3]);
-                            setState(() {
-                              consumerCalories = consumerCalories + int.parse(foodItemDetails[3]);
-                              dietItem.totalConsumedCalories = (int.parse(dietItem.totalConsumedCalories) + int.parse(foodItemDetails[3])).toString();
-                              dietItem.dietDetails.add(dietDetailItem);
-                            });
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 10, 8, 10),
-                          child: Row(children: [
-                            Expanded(
-                              child: Text(
-                                dietItem.diet,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              runAlignment: WrapAlignment.center,
-                              children: [
-                                Text(
-                                  dietItem.totalConsumedCalories + " of " + dietItem.totalCalories + "Cal",
-                                  style: const TextStyle(fontSize: 14, color: Colors.black45),
+                    return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          InkWell(
+                            onTap: () async {
+                              this.index = index;
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddFoodScreen(diet: dietItem.diet),
                                 ),
-                                const SizedBox(
-                                  width: 8,
+                              ).then((value) {
+                                var foodItemDetails = (value as List)
+                                    .map((e) => e as String)
+                                    .toList();
+                                print(foodItemDetails[0]);
+                                DietDetailItem dietDetailItem = DietDetailItem(
+                                    food: foodItemDetails[0],
+                                    size: foodItemDetails[1] +
+                                        " " +
+                                        foodItemDetails[2],
+                                    consumedCalories: foodItemDetails[3]);
+                                setState(() {
+                                  consumerCalories = consumerCalories +
+                                      int.parse(foodItemDetails[3]);
+                                  dietItem.totalConsumedCalories = (int.parse(
+                                              dietItem.totalConsumedCalories) +
+                                          int.parse(foodItemDetails[3]))
+                                      .toString();
+                                  dietItem.dietDetails.add(dietDetailItem);
+                                });
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(15, 10, 8, 10),
+                              child: Row(children: [
+                                Expanded(
+                                  child: Text(
+                                    dietItem.diet,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
                                 ),
-                                dietItem.dietDetails.isNotEmpty ? Image.network('https://www.rsolutions7.com/drmohan/images/merge.png') : Container(),
-                                dietItem.dietDetails.isNotEmpty
-                                    ? const SizedBox(
-                                        width: 8,
-                                      )
-                                    : Container(),
-                                const ClipOval(
-                                  child: Material(
-                                    color: Colors.blue, // Button color
-                                    child: SizedBox(
-                                      width: 30,
-                                      height: 30,
-                                      child: Icon(
-                                        Icons.add,
-                                        size: 20,
-                                        color: Colors.white,
+                                Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  runAlignment: WrapAlignment.center,
+                                  children: [
+                                    Text(
+                                      dietItem.totalConsumedCalories +
+                                          " of " +
+                                          dietItem.totalCalories +
+                                          "Cal",
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.black45),
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    dietItem.dietDetails.isNotEmpty
+                                        ? Image.network(
+                                            'https://www.rsolutions7.com/drmohan/images/merge.png')
+                                        : Container(),
+                                    dietItem.dietDetails.isNotEmpty
+                                        ? const SizedBox(
+                                            width: 8,
+                                          )
+                                        : Container(),
+                                    const ClipOval(
+                                      child: Material(
+                                        color: Colors.blue, // Button color
+                                        child: SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: Icon(
+                                            Icons.add,
+                                            size: 20,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ]),
                             ),
-                          ]),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Flexible(
-                        child: ListView.builder(
-                          itemCount: dietItem.dietDetails.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          // Provide a builder function. This is where the magic happens.
-                          // Convert each item into a widget based on the type of item it is.
-                          itemBuilder: (context, index) {
-                            final item = dietItem.dietDetails[index];
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                ListTile(
-                                  title: Text(
-                                    item.food,
-                                    style: const TextStyle(color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w600),
-                                  ),
-                                  subtitle: Text(
-                                    item.size,
-                                    style: const TextStyle(color: Colors.black45, fontSize: 14),
-                                  ),
-                                  trailing: Wrap(
-                                    crossAxisAlignment: WrapCrossAlignment.center,
-                                    runAlignment: WrapAlignment.center,
-                                    children: [
-                                      Text(
-                                        item.consumedCalories + " Cal",
-                                        style: const TextStyle(color: Colors.black45, fontSize: 14),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Flexible(
+                            child: ListView.builder(
+                              itemCount: dietItem.dietDetails.length,
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              // Provide a builder function. This is where the magic happens.
+                              // Convert each item into a widget based on the type of item it is.
+                              itemBuilder: (context, index) {
+                                final item = dietItem.dietDetails[index];
+                                return Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: <Widget>[
+                                    ListTile(
+                                      title: Text(
+                                        item.food,
+                                        style: const TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
                                       ),
-                                      const SizedBox(
-                                        width: 8,
+                                      subtitle: Text(
+                                        item.size,
+                                        style: const TextStyle(
+                                            color: Colors.black45,
+                                            fontSize: 14),
                                       ),
-                                      const Icon(Icons.more_vert)
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      dietItem.dietDetails.isNotEmpty
-                          ? const Divider(
-                              thickness: 3,
-                            )
-                          : Container()
-                    ]);
+                                      trailing: Wrap(
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        runAlignment: WrapAlignment.center,
+                                        children: [
+                                          Text(
+                                            item.consumedCalories + " Cal",
+                                            style: const TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 14),
+                                          ),
+                                          const SizedBox(
+                                            width: 8,
+                                          ),
+                                          const Icon(Icons.more_vert)
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                          dietItem.dietDetails.isNotEmpty
+                              ? const Divider(
+                                  thickness: 3,
+                                )
+                              : Container()
+                        ]);
                   },
                 ),
               ),
@@ -431,7 +535,9 @@ class _DailyHealthTrackerMyDietScreenState extends State<DailyHealthTrackerMyDie
         //child: Icon(Icons.add, color: Colors.blue),
         child: CircleAvatar(
           radius: 30.0,
-          backgroundImage: NetworkImage(OTPVerification.appscreensdataitems![36].srntxt2 + '/images/dmdscLOGOsmall.png'),
+          backgroundImage: NetworkImage(
+              OTPVerification.appscreensdataitems![36].srntxt2 +
+                  '/images/dmdscLOGOsmall.png'),
           backgroundColor: Colors.transparent,
         ),
         onPressed: () {},
@@ -448,7 +554,12 @@ class DietItem implements ListItem {
   final String consumerCalories;
   final String totalCalories;
 
-  DietItem({required this.heading, required this.subHeadingLineOne, required this.subHeadingLineTwo, required this.consumerCalories, required this.totalCalories});
+  DietItem(
+      {required this.heading,
+      required this.subHeadingLineOne,
+      required this.subHeadingLineTwo,
+      required this.consumerCalories,
+      required this.totalCalories});
 
   @override
   Widget buildTitle(BuildContext context) {
@@ -465,39 +576,49 @@ class DietItem implements ListItem {
         : Wrap(direction: Axis.vertical, children: [
             Text(
               subHeadingLineOne,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black45),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.black45),
             ),
             Text(
               subHeadingLineTwo,
-              style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 12, color: Colors.black45),
+              style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black45),
             ),
           ]);
   }
 
   @override
   Widget buildTrailing(BuildContext context) {
-    return Wrap(alignment: WrapAlignment.center, runAlignment: WrapAlignment.center, crossAxisAlignment: WrapCrossAlignment.center, children: [
-      Text(
-        consumerCalories + " of " + totalCalories,
-        style: const TextStyle(fontSize: 12, color: Colors.black45),
-      ),
-      const SizedBox(
-        width: 5,
-      ),
-      const ClipOval(
-        child: Material(
-          color: Colors.blue, // Button color
-          child: SizedBox(
-            width: 30,
-            height: 30,
-            child: Icon(
-              Icons.add,
-              size: 20,
-              color: Colors.white,
+    return Wrap(
+        alignment: WrapAlignment.center,
+        runAlignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          Text(
+            consumerCalories + " of " + totalCalories,
+            style: const TextStyle(fontSize: 12, color: Colors.black45),
+          ),
+          const SizedBox(
+            width: 5,
+          ),
+          const ClipOval(
+            child: Material(
+              color: Colors.blue, // Button color
+              child: SizedBox(
+                width: 30,
+                height: 30,
+                child: Icon(
+                  Icons.add,
+                  size: 20,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    ]);
+        ]);
   }
 }

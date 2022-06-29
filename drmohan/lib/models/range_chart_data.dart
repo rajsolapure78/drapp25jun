@@ -1,5 +1,5 @@
 class RangeChartData{
-  final String date;
+  final DateTime date;
   final num high;
   final num low;
 

@@ -46,126 +46,163 @@ class _DietTrackerTileState extends State<DietTrackerTile> {
     stops.add(0.5);
     stops.add(1.0);
 
-    final LinearGradient gradientColors = LinearGradient(colors: color, stops: stops);
+    final LinearGradient gradientColors =
+        LinearGradient(colors: color, stops: stops);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
-      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
         return Card(
           elevation: 6,
           child: Column(children: [
             Expanded(
               flex: 2,
-              child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
-                  child: AutoSizeText(
-                    "Calorie Intake(per day)",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: constraints.maxWidth * 0.078),
-                    maxLines: 1,
-                  ),
-                ),
-                Stack(children: [
-                  SizedBox(
-                    height: constraints.maxHeight * 0.45,
-                    width: constraints.maxHeight * 0.45,
-                    child: SfCircularChart(borderWidth: 0, margin: EdgeInsets.zero, series: _getRadialBarSeries()),
-                  ),
-                  Positioned(
-                    top: constraints.maxHeight * 0.15,
-                    left: constraints.maxHeight * 0.225 - 28,
-                    child: Wrap(direction: Axis.vertical, crossAxisAlignment: WrapCrossAlignment.center, children: [
-                      Text(
-                        chartDataRadial.first.y.toString(),
-                        style: TextStyle(fontSize: constraints.maxWidth * 0.078, fontWeight: FontWeight.bold),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 4, 4, 0),
+                      child: AutoSizeText(
+                        "Calorie Intake(per day)",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: constraints.maxWidth * 0.078),
+                        maxLines: 1,
                       ),
-                      Text(
-                        "Calories",
-                        style: TextStyle(fontSize: constraints.maxWidth * 0.07),
+                    ),
+                    Stack(children: [
+                      SizedBox(
+                        height: constraints.maxHeight * 0.45,
+                        width: constraints.maxHeight * 0.45,
+                        child: SfCircularChart(
+                            borderWidth: 0,
+                            margin: EdgeInsets.zero,
+                            series: _getRadialBarSeries()),
+                      ),
+                      Positioned(
+                        top: constraints.maxHeight * 0.15,
+                        left: constraints.maxHeight * 0.225 - 28,
+                        child: Wrap(
+                            direction: Axis.vertical,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Text(
+                                chartDataRadial.first.y.toString(),
+                                style: TextStyle(
+                                    fontSize: constraints.maxWidth * 0.078,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Calories",
+                                style: TextStyle(
+                                    fontSize: constraints.maxWidth * 0.07),
+                              ),
+                            ]),
                       ),
                     ]),
-                  ),
-                ]),
-                Text(
-                  "1200(+/-100)",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: constraints.maxWidth * 0.061),
-                )
-              ]),
+                    Text(
+                      "1200(+/-100)",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: constraints.maxWidth * 0.061),
+                    )
+                  ]),
             ),
             Expanded(
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.only(left: 12),
-                child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                  AutoSizeText(
-                    "Per Day To Reach 70 kgs",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.pink, fontSize: constraints.maxWidth * 0.061),
-                    maxLines: 1,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Fat :",
-                          style: TextStyle(fontSize: constraints.maxWidth * 0.061),
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: LinearPercentIndicator(
-                        width: constraints.maxWidth * 0.55,
-                        lineHeight: constraints.maxWidth * 0.063,
-                        percent: 43.7 / 100,
-                        progressColor: Colors.blue.shade200,
-                        center: Text(
-                          "43.7",
-                          style: TextStyle(color: Colors.white, fontSize: constraints.maxWidth * 0.061),
-                        ),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AutoSizeText(
+                        "Per Day To Reach 70 kgs",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.pink,
+                            fontSize: constraints.maxWidth * 0.061),
+                        maxLines: 1,
                       ),
-                    ),
-                  ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Protein :",
-                          style: TextStyle(fontSize: constraints.maxWidth * 0.061),
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: LinearPercentIndicator(
-                        width: constraints.maxWidth * 0.55,
-                        lineHeight: constraints.maxWidth * 0.063,
-                        percent: 54.6 / 100,
-                        progressColor: Colors.blue.shade400,
-                        center: Text(
-                          "54.6",
-                          style: TextStyle(color: Colors.white, fontSize: constraints.maxWidth * 0.061),
-                        ),
-                      ),
-                    ),
-                  ]),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    Expanded(
-                        flex: 1,
-                        child: Text(
-                          "Carb :",
-                          style: TextStyle(fontSize: constraints.maxWidth * 0.061),
-                        )),
-                    Expanded(
-                      flex: 2,
-                      child: LinearPercentIndicator(
-                        width: constraints.maxWidth * 0.55,
-                        lineHeight: constraints.maxWidth * 0.063,
-                        percent: 271.4 / 300,
-                        progressColor: Colors.blue,
-                        center: Text(
-                          "271.4",
-                          style: TextStyle(color: Colors.white, fontSize: constraints.maxWidth * 0.061),
-                        ),
-                      ),
-                    ),
-                  ])
-                ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Fat :",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.061),
+                                )),
+                            Expanded(
+                              flex: 2,
+                              child: LinearPercentIndicator(
+                                width: constraints.maxWidth * 0.55,
+                                lineHeight: constraints.maxWidth * 0.063,
+                                percent: 43.7 / 100,
+                                progressColor: Colors.blue.shade200,
+                                center: Text(
+                                  "43.7",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: constraints.maxWidth * 0.061),
+                                ),
+                              ),
+                            ),
+                          ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Protein :",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.061),
+                                )),
+                            Expanded(
+                              flex: 2,
+                              child: LinearPercentIndicator(
+                                width: constraints.maxWidth * 0.55,
+                                lineHeight: constraints.maxWidth * 0.063,
+                                percent: 54.6 / 100,
+                                progressColor: Colors.blue.shade400,
+                                center: Text(
+                                  "54.6",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: constraints.maxWidth * 0.061),
+                                ),
+                              ),
+                            ),
+                          ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: Text(
+                                  "Carb :",
+                                  style: TextStyle(
+                                      fontSize: constraints.maxWidth * 0.061),
+                                )),
+                            Expanded(
+                              flex: 2,
+                              child: LinearPercentIndicator(
+                                width: constraints.maxWidth * 0.55,
+                                lineHeight: constraints.maxWidth * 0.063,
+                                percent: 271.4 / 300,
+                                progressColor: Colors.blue,
+                                center: Text(
+                                  "271.4",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: constraints.maxWidth * 0.061),
+                                ),
+                              ),
+                            ),
+                          ])
+                    ]),
               ),
             ),
           ]),
@@ -176,7 +213,17 @@ class _DietTrackerTileState extends State<DietTrackerTile> {
 
   List<RadialBarSeries<RadialChartData, String>> _getRadialBarSeries() {
     return <RadialBarSeries<RadialChartData, String>>[
-      RadialBarSeries<RadialChartData, String>(trackColor: Colors.blue, trackOpacity: 0.3, dataSource: chartDataRadial, xValueMapper: (RadialChartData d1, _) => d1.x, yValueMapper: (RadialChartData d2, _) => d2.y, pointColorMapper: (RadialChartData d3, _) => d3.color, cornerStyle: CornerStyle.bothCurve, maximumValue: 1200, innerRadius: '80%', radius: '100%'),
+      RadialBarSeries<RadialChartData, String>(
+          trackColor: Colors.blue,
+          trackOpacity: 0.3,
+          dataSource: chartDataRadial,
+          xValueMapper: (RadialChartData d1, _) => d1.x,
+          yValueMapper: (RadialChartData d2, _) => d2.y,
+          pointColorMapper: (RadialChartData d3, _) => d3.color,
+          cornerStyle: CornerStyle.bothCurve,
+          maximumValue: 1200,
+          innerRadius: '80%',
+          radius: '100%'),
     ];
   }
 

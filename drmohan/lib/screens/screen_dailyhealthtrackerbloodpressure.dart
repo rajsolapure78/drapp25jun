@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:horizontal_time_picker/horizontal_time_picker.dart';
 import 'package:intl/intl.dart';
+
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -22,13 +23,20 @@ class DailyHealthTrackerBloodPressureScreen extends StatefulWidget {
   final HealthTrackerRecord bloodPressureVitals;
   final String vitalId;
 
-  const DailyHealthTrackerBloodPressureScreen({Key? key, required this.bloodPressureItem, required this.vitalId, required this.bloodPressureVitals}) : super(key: key);
+  const DailyHealthTrackerBloodPressureScreen(
+      {Key? key,
+      required this.bloodPressureItem,
+      required this.vitalId,
+      required this.bloodPressureVitals})
+      : super(key: key);
 
   @override
-  _DailyHealthTrackerBloodPressureScreenState createState() => _DailyHealthTrackerBloodPressureScreenState();
+  _DailyHealthTrackerBloodPressureScreenState createState() =>
+      _DailyHealthTrackerBloodPressureScreenState();
 }
 
-class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrackerBloodPressureScreen> {
+class _DailyHealthTrackerBloodPressureScreenState
+    extends State<DailyHealthTrackerBloodPressureScreen> {
   late FToast fToast;
   final HttpService httpService = HttpService();
   late DateTime _selectedDate;
@@ -50,7 +58,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
 
   late DateTime _displayDate;
 
-  callToSetAppBarTitle() => createState().setAppBarTitle("Blood Pressure monitor");
+  callToSetAppBarTitle() =>
+      createState().setAppBarTitle("Blood Pressure monitor");
 
   @override
   void initState() {
@@ -67,9 +76,14 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
     setState(() {
       isLoading = true;
     });
-    await httpService.getHealthTrackerRecord(DateFormat('MM/dd/yyyy').format(_selectedDate).toString(), int.parse(widget.vitalId)).then((value) {
+    await httpService
+        .getHealthTrackerRecord(
+            DateFormat('MM/dd/yyyy').format(_selectedDate).toString(),
+            int.parse(widget.vitalId))
+        .then((value) {
       widget.bloodPressureItem.clear();
-      widget.bloodPressureItem.addAll(value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
+      widget.bloodPressureItem.addAll(
+          value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
       sortData();
       setState(() {
         isLoading = false;
@@ -79,17 +93,27 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
 
   void sortData() {
     for (var element in widget.bloodPressureItem) {
-      print(element.Date);
-      print("element.Date bp");
-      if (double.parse(element.Value1) >= double.parse(widget.bloodPressureVitals.LowerRefRange) && double.parse(element.Value1) < double.parse(widget.bloodPressureVitals.UpperRefRange) && double.parse(element.Value2) <= double.parse(widget.bloodPressureVitals.UpperRefRange) && double.parse(element.Value2) > double.parse(widget.bloodPressureVitals.LowerRefRange)) {
-        //chartData.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
-        chartData.add(RangeChartData(date: element.Date, low: double.parse(element.Value1), high: double.parse(element.Value2)));
+      if (double.parse(element.Value1) >=
+          double.parse(widget.bloodPressureVitals.LowerRefRange) &&
+          double.parse(element.Value1) <
+              double.parse(widget.bloodPressureVitals.UpperRefRange) &&
+          double.parse(element.Value2) <=
+              double.parse(widget.bloodPressureVitals.UpperRefRange) &&
+          double.parse(element.Value2) >
+              double.parse(widget.bloodPressureVitals.LowerRefRange)) {
+        chartData.add(RangeChartData(
+            date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
+            low: double.parse(element.Value1),
+            high: double.parse(element.Value2)));
       } else {
-        //chartData1.add(RangeChartData(date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date), low: double.parse(element.Value1), high: double.parse(element.Value2)));
-        chartData1.add(RangeChartData(date: element.Date, low: double.parse(element.Value1), high: double.parse(element.Value2)));
+        chartData1.add(RangeChartData(
+            date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
+            low: double.parse(element.Value1),
+            high: double.parse(element.Value2)));
       }
     }
   }
+
 
   @override
   AppBarWidget createState() => AppBarWidget();
@@ -144,7 +168,14 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                                 backgroundColor: Colors.blue,
                                 child: Text(
                                   ProfileScreen.selectedProfile.PatientName[0],
-                                  style: TextStyle(fontFamily: 'Arial', fontStyle: FontStyle.normal, fontWeight: FontWeight.bold, color: Colors.white, fontSize: MediaQuery.of(context).size.width * 0.055),
+                                  style: TextStyle(
+                                      fontFamily: 'Arial',
+                                      fontStyle: FontStyle.normal,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.055),
                                 )),
                           ),
                           Container(
@@ -163,16 +194,24 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                                     Container(
                                         margin: EdgeInsets.all(0),
                                         color: Colors.white,
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.45,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.PatientName,
+                                            ProfileScreen
+                                                .selectedProfile.PatientName,
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -184,28 +223,44 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.09,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.09,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[0] + ":",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[0] +
+                                                ":",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.4,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
                                             ProfileScreen.selectedProfile.MrNo,
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -217,28 +272,45 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                                   children: [
                                     Container(
                                         margin: EdgeInsets.all(0),
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.1,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            DrMohanApp.appinfoitems![0].srntxt4.split(',')[1] + ": ",
+                                            DrMohanApp.appinfoitems![0].srntxt4
+                                                    .split(',')[1] +
+                                                ": ",
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         )),
                                     Container(
-                                        height: MediaQuery.of(context).size.height * 0.03,
-                                        width: MediaQuery.of(context).size.width * 0.35,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.03,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.35,
                                         child: Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            ProfileScreen.selectedProfile.DOB.split(" ")[0],
+                                            ProfileScreen.selectedProfile.DOB
+                                                .split(" ")[0],
                                             style: TextStyle(
-                                              fontSize: MediaQuery.of(context).size.width * 0.030,
+                                              fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.030,
                                               color: Colors.black,
                                               fontWeight: FontWeight.bold,
                                             ),
@@ -271,7 +343,16 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                                           ProfileScreen.selectedProfile.DOB
                                               .split(" ")[0],
                                 )),*/
-                          Container(height: MediaQuery.of(context).size.height * 0.15, width: MediaQuery.of(context).size.width * 0.15, margin: EdgeInsets.only(left: 2), child: Image.network(DrMohanApp.appinfoitems![0].srntxt2 + "/images/" + ProfileScreen.selectedProfile.Gender.toLowerCase() + ".png"))
+                          Container(
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.width * 0.15,
+                              margin: EdgeInsets.only(left: 2),
+                              child: Image.network(
+                                  DrMohanApp.appinfoitems![0].srntxt2 +
+                                      "/images/" +
+                                      ProfileScreen.selectedProfile.Gender
+                                          .toLowerCase() +
+                                      ".png"))
                         ],
                       ),
                     ),
@@ -282,7 +363,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                       children: const [
                         Text(
                           "Select Date & Time",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -305,7 +387,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                       child: Row(children: [
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.subtract(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.subtract(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_back_ios_outlined),
@@ -321,7 +404,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                         )),
                         IconButton(
                           onPressed: () {
-                            _displayDate = _displayDate.add(const Duration(days: 5));
+                            _displayDate =
+                                _displayDate.add(const Duration(days: 5));
                             _controller.displayDate = _displayDate;
                           },
                           icon: const Icon(Icons.arrow_forward_ios_outlined),
@@ -348,13 +432,16 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                         IconButton(
                           onPressed: () {
                             offset = _scrollControllerTimePicker.offset;
-                            offset > size ? offset = offset - size : offset = 0.0;
+                            offset > size
+                                ? offset = offset - size
+                                : offset = 0.0;
                             navigate();
                           },
                           icon: const Icon(Icons.arrow_back_ios_outlined),
                         ),
                         Expanded(
-                          child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                          child: LayoutBuilder(builder: (BuildContext context,
+                              BoxConstraints constraints) {
                             print(constraints.maxWidth);
                             size = constraints.maxWidth;
                             return HorizontalTimePicker(
@@ -368,13 +455,18 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                               startTimeInHour: 0,
                               endTimeInHour: 24,
                               timeIntervalInMinutes: 60,
-                              dateForTime: DateTime.now().add(const Duration(days: 1)),
+                              dateForTime:
+                                  DateTime.now().add(const Duration(days: 1)),
                               timeTextStyle: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
                               showDisabled: false,
-                              selectedTimeTextStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.lightBlue, decoration: TextDecoration.underline),
+                              selectedTimeTextStyle: const TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.lightBlue,
+                                  decoration: TextDecoration.underline),
                             );
                           }),
                         ),
@@ -395,7 +487,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                       Center(
                           child: Text(
                         'Enter Blood Pressure Value',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
                       ))
                     ],
                   ),
@@ -405,7 +498,8 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Text(
                       'Sys',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                     Container(
                       width: 60,
@@ -424,13 +518,17 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                         color: Colors.white,
                       ),
                       child: TextField(
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(5.0)),
                         controller: _textEditingController1,
                       ),
                     ),
                     const Text(
                       '/',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                     Container(
                       width: 60,
@@ -449,13 +547,17 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                         color: Colors.white,
                       ),
                       child: TextField(
-                        decoration: const InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(5.0)),
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(5.0)),
                         controller: _textEditingController2,
                       ),
                     ),
                     const Text(
                       'Dia',
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                   ]),
                   const SizedBox(
@@ -463,7 +565,10 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                   ),
                   InkWell(
                     onTap: () {
-                      _onTap(int.parse(widget.vitalId), int.parse(_textEditingController1.text), int.parse(_textEditingController2.text));
+                      _onTap(
+                          int.parse(widget.vitalId),
+                          int.parse(_textEditingController1.text),
+                          int.parse(_textEditingController2.text));
                     },
                     child: Container(
                       width: 125,
@@ -485,7 +590,10 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                         child: Text(
                           'SUBMIT',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
                         ),
                       ),
                     ),
@@ -499,7 +607,10 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                       Text(
                         'LAST FIVE READINGS',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 17),
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17),
                       ),
                     ]),
                   ),
@@ -515,10 +626,38 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                   ),
                   SfCartesianChart(
                     plotAreaBorderWidth: 0,
-                    primaryYAxis: NumericAxis(minimum: widget.bloodPressureVitals.YaxisMinRange != null ? double.parse(widget.bloodPressureVitals.YaxisMinRange) : 0, maximum: widget.bloodPressureVitals.YaxisMaxRange != null ? double.parse(widget.bloodPressureVitals.YaxisMaxRange) : 300, interval: widget.bloodPressureVitals.YaxisInterval != null ? double.parse(widget.bloodPressureVitals.YaxisInterval) : 30),
+                    primaryYAxis: NumericAxis(
+                        minimum:
+                            widget.bloodPressureVitals.YaxisMinRange != null
+                                ? double.parse(
+                                    widget.bloodPressureVitals.YaxisMinRange)
+                                : 0,
+                        maximum:
+                            widget.bloodPressureVitals.YaxisMaxRange != null
+                                ? double.parse(
+                                    widget.bloodPressureVitals.YaxisMaxRange)
+                                : 300,
+                        interval: widget.bloodPressureVitals.YaxisInterval !=
+                                null
+                            ? double.parse(
+                                widget.bloodPressureVitals.YaxisInterval)
+                            : 30),
                     primaryXAxis: DateTimeAxis(
-                        minimum: DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, _selectedTime.hour, _selectedTime.minute, _selectedTime.second),
-                        maximum: DateTime(_selectedDate.year, _selectedDate.month, _selectedDate.day, _selectedTime.hour, _selectedTime.minute, _selectedTime.second).add(const Duration(minutes: 60)),
+                        minimum: DateTime(
+                            _selectedDate.year,
+                            _selectedDate.month,
+                            _selectedDate.day,
+                            _selectedTime.hour,
+                            _selectedTime.minute,
+                            _selectedTime.second),
+                        maximum: DateTime(
+                                _selectedDate.year,
+                                _selectedDate.month,
+                                _selectedDate.day,
+                                _selectedTime.hour,
+                                _selectedTime.minute,
+                                _selectedTime.second)
+                            .add(const Duration(minutes: 60)),
                         interval: 10,
                         dateFormat: DateFormat.Hm(),
                         edgeLabelPlacement: EdgeLabelPlacement.shift,
@@ -533,20 +672,38 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-                          Container(width: 28, height: 10, decoration: BoxDecoration(shape: BoxShape.rectangle, border: Border.all(width: 2, color: Colors.blue)), child: Container()),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text("Normal"),
-                        ]),
-                        Wrap(crossAxisAlignment: WrapCrossAlignment.center, children: [
-                          Container(width: 28, height: 10, decoration: BoxDecoration(shape: BoxShape.rectangle, border: Border.all(width: 2, color: Colors.pink)), child: Container()),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          const Text("Abnormal"),
-                        ]),
+                        Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Container(
+                                  width: 28,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      border: Border.all(
+                                          width: 2, color: Colors.blue)),
+                                  child: Container()),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const Text("Normal"),
+                            ]),
+                        Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Container(
+                                  width: 28,
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      border: Border.all(
+                                          width: 2, color: Colors.pink)),
+                                  child: Container()),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const Text("Abnormal"),
+                            ]),
                       ],
                     ),
                   ),
@@ -561,7 +718,9 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
         //child: Icon(Icons.add, color: Colors.blue),
         child: CircleAvatar(
           radius: 30.0,
-          backgroundImage: NetworkImage(OTPVerification.appscreensdataitems![36].srntxt2 + '/images/dmdscLOGOsmall.png'),
+          backgroundImage: NetworkImage(
+              OTPVerification.appscreensdataitems![36].srntxt2 +
+                  '/images/dmdscLOGOsmall.png'),
           backgroundColor: Colors.transparent,
         ),
         onPressed: () {},
@@ -571,7 +730,36 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
   }
 
   List<RangeColumnSeries<RangeChartData, dynamic>> _getRageColumnSeries() {
-    return <RangeColumnSeries<RangeChartData, dynamic>>[RangeColumnSeries(dataSource: chartData, trackBorderWidth: 28, xValueMapper: (RangeChartData d1, _) => d1.date, highValueMapper: (RangeChartData d2, _) => d2.high, lowValueMapper: (RangeChartData d3, _) => d3.low, opacity: 0.3, pointColorMapper: (RangeChartData d4, _) => Colors.blue, markerSettings: MarkerSettings(isVisible: true, shape: DataMarkerType.rectangle, width: 28, borderWidth: 2), dataLabelSettings: DataLabelSettings(isVisible: true)), RangeColumnSeries(dataSource: chartData1, trackBorderWidth: 28, xValueMapper: (RangeChartData d1, _) => d1.date, highValueMapper: (RangeChartData d2, _) => d2.high, lowValueMapper: (RangeChartData d3, _) => d3.low, opacity: 0.3, pointColorMapper: (RangeChartData d4, _) => Colors.pink, markerSettings: MarkerSettings(isVisible: true, shape: DataMarkerType.rectangle, width: 28, borderWidth: 2), dataLabelSettings: DataLabelSettings(isVisible: true))];
+    return <RangeColumnSeries<RangeChartData, dynamic>>[
+      RangeColumnSeries(
+          dataSource: chartData,
+          trackBorderWidth: 28,
+          xValueMapper: (RangeChartData d1, _) => d1.date,
+          highValueMapper: (RangeChartData d2, _) => d2.high,
+          lowValueMapper: (RangeChartData d3, _) => d3.low,
+          opacity: 0.3,
+          pointColorMapper: (RangeChartData d4, _) => Colors.blue,
+          markerSettings: MarkerSettings(
+              isVisible: true,
+              shape: DataMarkerType.rectangle,
+              width: 28,
+              borderWidth: 2),
+          dataLabelSettings: DataLabelSettings(isVisible: true)),
+      RangeColumnSeries(
+          dataSource: chartData1,
+          trackBorderWidth: 28,
+          xValueMapper: (RangeChartData d1, _) => d1.date,
+          highValueMapper: (RangeChartData d2, _) => d2.high,
+          lowValueMapper: (RangeChartData d3, _) => d3.low,
+          opacity: 0.3,
+          pointColorMapper: (RangeChartData d4, _) => Colors.pink,
+          markerSettings: MarkerSettings(
+              isVisible: true,
+              shape: DataMarkerType.rectangle,
+              width: 28,
+              borderWidth: 2),
+          dataLabelSettings: DataLabelSettings(isVisible: true))
+    ];
   }
 
   Future<void> _onTap(int vitalId, int value1, int value2) async {
@@ -579,20 +767,27 @@ class _DailyHealthTrackerBloodPressureScreenState extends State<DailyHealthTrack
       setState(() {
         isSubmitting = true;
       });
-      await httpService.saveBloodPressure(vitalId, value1, value2).then((value) {
+      await httpService
+          .saveBloodPressure(vitalId, value1, value2)
+          .then((value) {
         if (value == 200) {
           fToast.showToast(
             child: showSuccessToast("Blood Glucose Value Updated"),
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 2),
           );
-          fetchData();
         } else {
-          fToast.showToast(child: showErrorToast("Something Went Wrong!!"), gravity: ToastGravity.BOTTOM, toastDuration: const Duration(seconds: 2));
+          fToast.showToast(
+              child: showErrorToast("Something Went Wrong!!"),
+              gravity: ToastGravity.BOTTOM,
+              toastDuration: const Duration(seconds: 2));
         }
         setState(() {
           isSubmitting = false;
         });
+        _textEditingController1.clear();
+        _textEditingController2.clear();
+        fetchData();
       });
     } on Exception catch (e) {
       log(e.toString());
