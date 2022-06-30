@@ -1,4 +1,6 @@
-class HealthTrackerRecord {
+import 'package:drmohan/models/model_recordlistitem.dart';
+
+class HealthTrackerRecord{
   final List<dynamic> list;
   final String YaxisMinRange;
   final String YaxisMaxRange;

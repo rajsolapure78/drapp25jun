@@ -13,7 +13,9 @@ class FoodSearchBar extends StatefulWidget {
 }
 
 class _FoodSearchBarState extends State<FoodSearchBar> {
-  final TextEditingController _textEditingController = TextEditingController();
+  TextEditingController _textEditingController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {

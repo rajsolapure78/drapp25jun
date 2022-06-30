@@ -18,8 +18,7 @@ class DatePickerTimeline extends StatefulWidget {
 class _DatePickerTimelineState extends State<DatePickerTimeline> {
   @override
   Widget build(BuildContext context) {
-    return
-      Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         SingleChildScrollView(
@@ -42,7 +41,7 @@ class _DatePickerTimelineState extends State<DatePickerTimeline> {
                       widget.onSelected(onSelectionChanged.value);
                     },
                     monthViewSettings: const DateRangePickerMonthViewSettings(
-                        viewHeaderHeight: 0, numberOfWeeksInView: 1, ),
+                        viewHeaderHeight: 0, numberOfWeeksInView: 1),
                   ),
                 ),
               ),

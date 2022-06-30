@@ -1,9 +1,9 @@
-git clone git clone git@github.com:rajsolapure78/drapp25jun.git
+git clone git@github.com:rajsolapure78/drapp25jun.git
 git checkout main // branch
 git pull origin main // branch
 git checkout main // branch
 git add --all
-git commit -a -m "DR25Jun2022_2" // change commit value
+git commit -a -m "DR25Jun2022_3" // change commit value
 git push origin main //branch
 
 flutter build apk --debug
