@@ -574,7 +574,6 @@ class ProfileScreen extends StatelessWidget {
                               child: InkWell(
                                 onTap: () {
                                   selectedProfile = profiles[index];
-                                  print(selectedProfile.MrNo);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
