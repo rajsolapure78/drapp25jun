@@ -173,21 +173,12 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
                       StaggeredGridTile.count(
                         crossAxisCellCount: 9,
                         mainAxisCellCount: 7,
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      DailyHealthTrackerBloodPressureScreen(
-                                    bloodPressureItem: bloodPressureVitalsList,
-                                    vitalId: bloodPressureVitalId,
-                                    bloodPressureVitals: bloodPressureVitals,
-                                  ),
-                                )).then((_) => fetchData());
-                          },
-                          child: VitalsTrackerTile(
-                              bloodPressureItem: bloodPressureVitalsList),
+                        child: VitalsTrackerTile(
+                          bloodPressureItem: bloodPressureVitalsList,
+                          bloodPressureVitalId: bloodPressureVitalId,
+                          bloodPressureVitals: bloodPressureVitals,
+                          weightItem: weightVitalsList,
+                          weightVitalId: weightVitalId,
                         ),
                       ),
                       StaggeredGridTile.count(

@@ -22,8 +22,9 @@ class DailyHealthTrackerBloodPressureScreen extends StatefulWidget {
   final List<HealthTrackerRecordItem> bloodPressureItem;
   final HealthTrackerRecord bloodPressureVitals;
   final String vitalId;
+  // late HealthTrackerRecord vitals;
 
-  const DailyHealthTrackerBloodPressureScreen(
+  DailyHealthTrackerBloodPressureScreen(
       {Key? key,
       required this.bloodPressureItem,
       required this.vitalId,
@@ -65,10 +66,10 @@ class _DailyHealthTrackerBloodPressureScreenState
   void initState() {
     fToast = FToast();
     fToast.init(context);
-    sortData();
     _selectedDate = DateTime.now();
     _selectedTime = DateTime.now();
     _displayDate = DateTime.now().subtract(const Duration(days: 2));
+    fetchData();
     super.initState();
   }
 
@@ -81,10 +82,14 @@ class _DailyHealthTrackerBloodPressureScreenState
             DateFormat('MM/dd/yyyy').format(_selectedDate).toString(),
             int.parse(widget.vitalId))
         .then((value) {
-      widget.bloodPressureItem.clear();
-      widget.bloodPressureItem.addAll(
-          value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
-      sortData();
+      if (value.list != null && value.list.isNotEmpty) {
+        // widget.vitals = value;
+        // print("Vitals - " + widget.vitals.toString());
+        widget.bloodPressureItem.clear();
+        widget.bloodPressureItem.addAll(
+            value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
+        sortData();
+      }
       setState(() {
         isLoading = false;
       });
@@ -94,13 +99,13 @@ class _DailyHealthTrackerBloodPressureScreenState
   void sortData() {
     for (var element in widget.bloodPressureItem) {
       if (double.parse(element.Value1) >=
-          double.parse(widget.bloodPressureVitals.LowerRefRange) &&
+              double.parse("80.00") &&
           double.parse(element.Value1) <
-              double.parse(widget.bloodPressureVitals.UpperRefRange) &&
+              double.parse("120.00") &&
           double.parse(element.Value2) <=
-              double.parse(widget.bloodPressureVitals.UpperRefRange) &&
+              double.parse("120.00") &&
           double.parse(element.Value2) >
-              double.parse(widget.bloodPressureVitals.LowerRefRange)) {
+              double.parse("120")) {
         chartData.add(RangeChartData(
             date: DateFormat("dd-MM-yyyy hh:mm:ss").parse(element.Date),
             low: double.parse(element.Value1),
@@ -113,7 +118,6 @@ class _DailyHealthTrackerBloodPressureScreenState
       }
     }
   }
-
 
   @override
   AppBarWidget createState() => AppBarWidget();
@@ -628,20 +632,24 @@ class _DailyHealthTrackerBloodPressureScreenState
                     plotAreaBorderWidth: 0,
                     primaryYAxis: NumericAxis(
                         minimum:
-                            widget.bloodPressureVitals.YaxisMinRange != null
-                                ? double.parse(
-                                    widget.bloodPressureVitals.YaxisMinRange)
-                                : 0,
+                            // widget.vitals.YaxisMinRange != null
+                            //     ? double.parse(
+                            //         widget.vitals.YaxisMinRange)
+                            //     :
+                            0,
                         maximum:
-                            widget.bloodPressureVitals.YaxisMaxRange != null
-                                ? double.parse(
-                                    widget.bloodPressureVitals.YaxisMaxRange)
-                                : 300,
-                        interval: widget.bloodPressureVitals.YaxisInterval !=
-                                null
-                            ? double.parse(
-                                widget.bloodPressureVitals.YaxisInterval)
-                            : 30),
+                            // widget.vitals.YaxisMaxRange != null
+                            //     ? double.parse(
+                            //         widget.vitals.YaxisMaxRange)
+                            //     :
+                            300,
+                        interval:
+                        // widget.vitals.YaxisInterval !=
+                        //         null
+                        //     ? double.parse(
+                        //         widget.vitals.YaxisInterval)
+                        //     :
+                        30),
                     primaryXAxis: DateTimeAxis(
                         minimum: DateTime(
                             _selectedDate.year,

@@ -83,10 +83,12 @@ class _DailyHealthTrackerGlucoseScreenState
             DateFormat('MM/dd/yyyy').format(_selectedDate).toString(),
             int.parse(widget.vitalId))
         .then((value) {
-      widget.glucoseItem.clear();
-      widget.glucoseItem.addAll(
-          value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
-      //sortData();
+      if (value.list != null && value.list.isNotEmpty) {
+        widget.glucoseItem.clear();
+        widget.glucoseItem.addAll(
+            value.list.map((e) => HealthTrackerRecordItem.fromMap(e)).toList());
+        sortData();
+      }
       setState(() {
         isLoading = false;
       });
@@ -116,10 +118,10 @@ class _DailyHealthTrackerGlucoseScreenState
   void initState() {
     fToast = FToast();
     fToast.init(context);
-    sortData();
     _selectedDate = DateTime.now();
     _selectedTime = DateTime.now();
     _displayDate = DateTime.now().subtract(const Duration(days: 2));
+    sortData();
     super.initState();
   }
 
@@ -714,7 +716,6 @@ class _DailyHealthTrackerGlucoseScreenState
             gravity: ToastGravity.BOTTOM,
             toastDuration: const Duration(seconds: 2),
           );
-
         } else {
           fToast.showToast(
             child: showErrorToast("Something Went Wrong!!"),
