@@ -1,12 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:drmohan/models/model_healthtrackeritem.dart';
+import 'package:drmohan/models/model_recordlistitem.dart';
 import 'package:drmohan/models/radial_chart_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class WeightTrackerTile extends StatefulWidget {
-  final HealthTrackerItem weightItem;
+  final List<HealthTrackerRecordItem> weightItem;
 
   const WeightTrackerTile({Key? key, required this.weightItem})
       : super(key: key);
