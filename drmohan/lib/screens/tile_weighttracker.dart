@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:drmohan/models/model_healthtrackeritem.dart';
 import 'package:drmohan/models/model_recordlistitem.dart';
 import 'package:drmohan/models/radial_chart_data.dart';
 import 'package:flutter/cupertino.dart';

@@ -8,9 +8,11 @@ class VitalsTrackerTile extends StatefulWidget {
   final List<HealthTrackerRecordItem> bloodPressureItem;
   final String bloodPressureVitalId;
   final HealthTrackerRecord bloodPressureVitals;
+  final String bloodPressureRef;
 
   final List<HealthTrackerRecordItem> weightItem;
   final String weightVitalId;
+  final String weightRef;
 
   const VitalsTrackerTile(
       {Key? key,
@@ -18,7 +20,9 @@ class VitalsTrackerTile extends StatefulWidget {
       required this.bloodPressureVitalId,
       required this.bloodPressureVitals,
       required this.weightItem,
-      required this.weightVitalId})
+      required this.weightVitalId,
+      required this.bloodPressureRef,
+      required this.weightRef})
       : super(key: key);
 
   @override
@@ -76,19 +80,19 @@ class _VitalsTrackerTileState extends State<VitalsTrackerTile> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          "70 ",
+                          widget.weightRef,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: constraints.maxWidth * 0.078),
                         ),
-                        Text(
-                          "kg",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: constraints.maxWidth * 0.043),
-                        ),
+                        // Text(
+                        //   "kg",
+                        //   style: TextStyle(
+                        //       color: Colors.black,
+                        //       fontWeight: FontWeight.bold,
+                        //       fontSize: constraints.maxWidth * 0.043),
+                        // ),
                       ],
                     ),
                   ),
@@ -127,14 +131,14 @@ class _VitalsTrackerTileState extends State<VitalsTrackerTile> {
                       textBaseline: TextBaseline.alphabetic,
                       children: [
                         Text(
-                          "80/120 ",
+                          widget.bloodPressureRef.split(" ").first.padRight(7),
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: constraints.maxWidth * 0.078),
                         ),
                         Text(
-                          "mmHg",
+                          widget.bloodPressureRef.split(" ").last,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,

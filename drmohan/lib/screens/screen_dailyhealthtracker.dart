@@ -41,8 +41,10 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
   HealthTrackerRecord bloodPressureVitals = HealthTrackerRecord.fromMap({});
   late String heightVitalId;
   late String weightVitalId;
+  late String weightRef;
   late String bloodGlucoseVitalId;
   late String bloodPressureVitalId;
+  late String bloodPressureRef;
   late String foodVitalId;
   bool _isLoading = false;
 
@@ -72,6 +74,7 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
               int.parse(element.VitalID)));
         } else if (element.VitalName == "BLOOD PRESSURE") {
           bloodPressureVitalId = element.VitalID;
+          bloodPressureRef = element.RefRange;
           futures.add(httpService.getHealthTrackerRecord(
               DateFormat('MM/dd/yyyy').format((DateTime.now())).toString(),
               int.parse(element.VitalID)));
@@ -79,6 +82,7 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
           heightVitalId = element.VitalID;
         } else if (element.VitalName == "WEIGHT") {
           weightVitalId = element.VitalID;
+          weightRef = element.RefRange;
         } else if (element.VitalName == "FOOD") {
           foodVitalId = element.VitalID;
         }
@@ -177,8 +181,10 @@ class _DailyHealthTrackerScreenState extends State<DailyHealthTrackerScreen> {
                           bloodPressureItem: bloodPressureVitalsList,
                           bloodPressureVitalId: bloodPressureVitalId,
                           bloodPressureVitals: bloodPressureVitals,
+                          bloodPressureRef: bloodPressureRef,
                           weightItem: weightVitalsList,
                           weightVitalId: weightVitalId,
+                          weightRef: weightRef
                         ),
                       ),
                       StaggeredGridTile.count(
